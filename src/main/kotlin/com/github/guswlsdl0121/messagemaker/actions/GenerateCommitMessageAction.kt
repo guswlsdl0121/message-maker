@@ -7,19 +7,13 @@ import com.github.guswlsdl0121.messagemaker.services.CommitMessageService
 
 class GenerateCommitMessageAction : AnAction() {
     private val logger = Logger.getInstance(GenerateCommitMessageAction::class.java)
+    private val commitMessageService = CommitMessageService()
 
     override fun actionPerformed(e: AnActionEvent) {
-        e.project ?: run {
+        e.project?.let {
+            commitMessageService.generateCommitMessage(e)
+        } ?: run {
             logger.warn("Project is null")
-            return
-        }
-
-        val commitMessageService = CommitMessageService(e)
-        val diff = commitMessageService.getDiff()
-
-        if (diff.isNotEmpty()) {
-            commitMessageService.generateCommitMessage(diff)
         }
     }
 }
-

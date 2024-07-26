@@ -23,7 +23,15 @@ repositories {
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
-//    implementation(libs.exampleLibrary)
+    // JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+
+    // Mockito
+    testImplementation("org.mockito:mockito-core:5.0.0")
+    testImplementation("org.mockito:mockito-inline:5.0.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.0")
+    testImplementation("junit:junit:4.13.2")
 }
 
 // Set the JVM language level used to build the project.

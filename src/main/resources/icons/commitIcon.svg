@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64">
+    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+    <g id="SVGRepo_iconCarrier">
+        <path d="M32 2C15.4 2 2 15.4 2 32s13.4 30 30 30 30-13.4 30-30S48.6 2 32 2zM32 58C17.7 58 6 46.3 6 32S17.7 6 32 6s26 11.7 26 26S46.3 58 32 58z"></path>
+        <path d="M32 16c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16S40.8 16 32 16zM32 46c-7.7 0-14-6.3-14-14s6.3-14 14-14 14 6.3 14 14S39.7 46 32 46z"></path>
+        <path d="M32 26c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6S35.3 26 32 26z"></path>
+    </g>
+</svg>
+

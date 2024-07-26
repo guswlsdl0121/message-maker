@@ -1,4 +1,4 @@
-package org.jetbrains.plugins.template
+package com.github.guswlsdl0121.messagemaker
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

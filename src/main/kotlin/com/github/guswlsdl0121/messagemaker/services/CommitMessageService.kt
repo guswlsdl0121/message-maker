@@ -1,32 +1,25 @@
 package com.github.guswlsdl0121.messagemaker.services
 
+import com.github.guswlsdl0121.messagemaker.providers.CommitWorkflowHandlerProvider
+import com.github.guswlsdl0121.messagemaker.providers.DiffProvider
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.vcs.commit.AbstractCommitWorkflowHandler
-import com.intellij.openapi.vcs.VcsDataKeys
 
-class CommitMessageService {
+class CommitMessageService(
+    private val commitWorkflowHandlerProvider: CommitWorkflowHandlerProvider,
+    private val diffProvider: DiffProvider
+) {
     private val logger = Logger.getInstance(CommitMessageService::class.java)
 
     fun generateCommitMessage(e: AnActionEvent) {
-        e.project ?: run {
-            logger.warn("Project is null")
+        val commitWorkflowHandler = commitWorkflowHandlerProvider.getCommitWorkflowHandler(e) ?: run {
+            logger.warn("CommitWorkflowHandler가 null입니다")
             return
         }
 
-        val commitWorkflowHandler = getCommitWorkflowHandler(e) ?: run {
-            logger.warn("CommitWorkflowHandler is null")
-            return
-        }
-
-        val diffProvider = DiffProviderInVcs(commitWorkflowHandler)
-        val diff = diffProvider.getDiff()
+        val diff = diffProvider.getDiff(commitWorkflowHandler)
         if (diff.isNotEmpty()) {
-            logger.info("Generated commit message from diff: $diff")
+            logger.info("diff에서 생성된 커밋 메시지: $diff")
         }
-    }
-
-    private fun getCommitWorkflowHandler(e: AnActionEvent): AbstractCommitWorkflowHandler<*, *>? {
-        return e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as? AbstractCommitWorkflowHandler<*, *>
     }
 }

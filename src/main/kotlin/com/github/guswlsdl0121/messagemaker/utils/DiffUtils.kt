@@ -1,29 +1,10 @@
-package com.github.guswlsdl0121.messagemaker.services
+package com.github.guswlsdl0121.messagemaker.utils
 
-import com.intellij.openapi.diagnostic.Logger
-import com.intellij.vcs.commit.AbstractCommitWorkflowHandler
 import com.intellij.openapi.vcs.changes.Change
 import com.intellij.openapi.vcs.changes.ContentRevision
 
-class DiffProviderInVcs(commitWorkflowHandler: AbstractCommitWorkflowHandler<*, *>) {
-    private val logger = Logger.getInstance(DiffProviderInVcs::class.java)
-    private val includedChanges: List<Change> = commitWorkflowHandler.ui.getIncludedChanges()
-
-    fun getDiff(): String {
-        return if (includedChanges.isEmpty()) {
-            logger.info("No changes selected")
-            ""
-        } else {
-            buildString {
-                includedChanges.forEach { change ->
-                    val diff = generateDiff(change)
-                    append(diff)
-                }
-            }
-        }
-    }
-
-    private fun generateDiff(change: Change): String {
+object DiffUtils {
+    fun generateDiff(change: Change): String {
         val beforeContent = getContent(change.beforeRevision)
         val afterContent = getContent(change.afterRevision)
         return buildString {
@@ -54,3 +35,4 @@ class DiffProviderInVcs(commitWorkflowHandler: AbstractCommitWorkflowHandler<*, 
         return diffs.joinToString("\n")
     }
 }
+

@@ -1,9 +1,11 @@
 package com.github.guswlsdl0121.messagemaker.prompt
 
+import com.intellij.openapi.components.Service
 import com.intellij.openapi.vcs.changes.Change
 import com.intellij.openapi.vcs.changes.ContentRevision
 
-object DiffPrompter {
+@Service
+class DiffSummaryGenerator {
     fun generate(changes: List<Change>): String {
         val detailedDiffs = changes.map { generateDetailedDiff(it) }
         val summary = summarizeChanges(changes)

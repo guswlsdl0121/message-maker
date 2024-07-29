@@ -8,7 +8,7 @@
         <![CDATA[<p>This plugin helps to generate commit messages based on selected changes.</p>]]></description>
     <change-notes><![CDATA[<p>Initial release</p>]]></change-notes>
 
-    <idea-version since-build="211.6693.111"/>
+    <idea-version since-build="222.3345.118"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.vcs</depends>

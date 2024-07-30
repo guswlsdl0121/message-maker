@@ -30,7 +30,7 @@ dependencies {
     // Mockito
     testImplementation("org.mockito:mockito-core:5.0.0")
     testImplementation("org.mockito:mockito-inline:5.0.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
 
     testImplementation("junit:junit:4.13.2")
 }

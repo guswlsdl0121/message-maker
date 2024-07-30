@@ -24,4 +24,10 @@
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
         </action>
     </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService
+                serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffGenerator"
+                serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleDiffGenerator"/>
+    </extensions>
 </idea-plugin>

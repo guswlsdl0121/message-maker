@@ -5,35 +5,41 @@ class SimpleDiffGenerator : DiffGenerator {
         val beforeLines = beforeContent.lines()
         val afterLines = afterContent.lines()
 
-        val commonPrefixLength = findCommonPrefixLength(beforeLines, afterLines)
-        val commonSuffixLength = findCommonSuffixLength(beforeLines, afterLines, commonPrefixLength)
+        val diff = mutableListOf<String>()
+        var i = 0
+        var j = 0
 
-        val beforeDiff = extractDiff(beforeLines, commonPrefixLength, commonSuffixLength, "-")
-        val afterDiff = extractDiff(afterLines, commonPrefixLength, commonSuffixLength, "+")
-
-        return (beforeDiff + afterDiff).joinToString("\n")
-    }
-
-    private fun findCommonPrefixLength(beforeLines: List<String>, afterLines: List<String>): Int {
-        var commonPrefix = 0
-        while (commonPrefix < beforeLines.size && commonPrefix < afterLines.size && beforeLines[commonPrefix] == afterLines[commonPrefix]) {
-            commonPrefix++
+        while (i < beforeLines.size || j < afterLines.size) {
+            when {
+                i >= beforeLines.size -> {
+                    // 원본 내용이 모두 처리되었고, 새 내용에 추가된 줄들을 처리
+                    diff.add("+${afterLines[j]}")
+                    j++
+                }
+                j >= afterLines.size -> {
+                    // 새 내용이 모두 처리되었고, 원본 내용에서 삭제된 줄들을 처리
+                    diff.add("-${beforeLines[i]}")
+                    i++
+                }
+                beforeLines[i] == afterLines[j] -> {
+                    // 양쪽 내용이 동일한 경우, 변경 없이 다음 줄로 넘어감
+                    i++
+                    j++
+                }
+                else -> {
+                    // 내용이 다른 경우, 삭제와 추가로 처리
+                    if (beforeLines[i].isNotEmpty()) {
+                        diff.add("-${beforeLines[i]}")
+                    }
+                    if (afterLines[j].isNotEmpty()) {
+                        diff.add("+${afterLines[j]}")
+                    }
+                    i++
+                    j++
+                }
+            }
         }
-        return commonPrefix
-    }
 
-    private fun findCommonSuffixLength(beforeLines: List<String>, afterLines: List<String>, commonPrefixLength: Int): Int {
-        var commonSuffix = 0
-        while (commonSuffix + commonPrefixLength < beforeLines.size &&
-            commonSuffix + commonPrefixLength < afterLines.size &&
-            beforeLines[beforeLines.size - 1 - commonSuffix] == afterLines[afterLines.size - 1 - commonSuffix]) {
-            commonSuffix++
-        }
-        return commonSuffix
-    }
-
-    private fun extractDiff(lines: List<String>, commonPrefixLength: Int, commonSuffixLength: Int, prefix: String): List<String> {
-        return lines.subList(commonPrefixLength, lines.size - commonSuffixLength)
-            .map { "$prefix$it" }
+        return diff.joinToString("\n")
     }
 }

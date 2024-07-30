@@ -3,6 +3,7 @@ package com.github.guswlsdl0121.messagemaker.services.diff
 import com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffGenerator
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
+import com.intellij.openapi.diagnostic.logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vcs.changes.Change
 
@@ -32,6 +33,12 @@ $detailedDiffs""".trimIndent()
     private fun generateDetailedDiff(change: Change, diffGenerator: DiffGenerator): String {
         val beforeName = change.beforeRevision?.file?.name
         val afterName = change.afterRevision?.file?.name
+
+//        Log.info("before: " + change.beforeRevision?.content + "\n\n")
+//        Log.info("after:" + change.afterRevision?.content + "\n\n")
+        LOG.info("\n" + "before\n" +  change.beforeRevision?.content + "\n\n")
+        LOG.info("\n" + "after\n" +  change.afterRevision?.content + "\n\n")
+
         val diffContent = diffGenerator.generate(
             change.beforeRevision?.content ?: "",
             change.afterRevision?.content ?: ""
@@ -43,5 +50,9 @@ ${beforeName?.let { "**Path before change**: $it\n" } ?: ""}${afterName?.let { "
 **Detailed changes**:
 $diffContent
 """
+    }
+
+    companion object {
+        private val LOG = logger<DiffSummaryService>()
     }
 }

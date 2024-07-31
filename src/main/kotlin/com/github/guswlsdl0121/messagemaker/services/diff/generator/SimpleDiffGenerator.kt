@@ -16,16 +16,19 @@ class SimpleDiffGenerator : DiffGenerator {
                     diff.add("+${afterLines[j]}")
                     j++
                 }
+
                 j >= afterLines.size -> {
                     // 새 내용이 모두 처리되었고, 원본 내용에서 삭제된 줄들을 처리
                     diff.add("-${beforeLines[i]}")
                     i++
                 }
+
                 beforeLines[i] == afterLines[j] -> {
                     // 양쪽 내용이 동일한 경우, 변경 없이 다음 줄로 넘어감
                     i++
                     j++
                 }
+
                 else -> {
                     // 내용이 다른 경우, 삭제와 추가로 처리
                     if (beforeLines[i].isNotEmpty()) {

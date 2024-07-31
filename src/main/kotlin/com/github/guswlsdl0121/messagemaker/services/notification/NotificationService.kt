@@ -9,24 +9,17 @@ import com.intellij.openapi.project.Project
 class NotificationService {
     companion object {
         private const val NOTIFICATION_GROUP_ID = "Commit Message Generator"
+        private const val PLUGIN_NAME = "MessageMaker"
 
-        fun showInfo(project: Project?, content: String) {
-            show(project, content, NotificationType.INFORMATION)
-        }
-
-        fun showWarning(project: Project?, content: String) {
-            show(project, content, NotificationType.WARNING)
-        }
-
-        fun showError(project: Project?, content: String) {
-            show(project, content, NotificationType.ERROR)
-        }
-
-        private fun show(project: Project?, content: String, type: NotificationType) {
+        fun show(project: Project?, title: String, content: String, type: NotificationType) {
             NotificationGroupManager.getInstance()
                 .getNotificationGroup(NOTIFICATION_GROUP_ID)
-                .createNotification(content, type)
+                .createNotification(createTitle(title), content, type)
                 .notify(project)
+        }
+
+        private fun createTitle(title: String): String {
+            return "$PLUGIN_NAME: $title"
         }
     }
 }

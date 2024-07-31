@@ -13,7 +13,7 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.vcs</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.MessageBundle</resource-bundle>
 
     <actions>
         <action id="com.github.guswlsdl0121.messagemaker.actions.GenerateCommitMessageAction"
@@ -29,5 +29,10 @@
         <projectService
                 serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffGenerator"
                 serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleDiffGenerator"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Commit Message Generator" displayType="BALLOON"
+                           key="notification.group.commit.message.generator"/>
     </extensions>
 </idea-plugin>

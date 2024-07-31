@@ -3,7 +3,7 @@ package com.github.guswlsdl0121.messagemaker.utils
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.diagnostic.logger
 
-object LogWrapper {
+object LogFactory {
     private inline fun <reified T : Any> getLogger(): Logger = logger<T>()
 
     fun info(message: String) {

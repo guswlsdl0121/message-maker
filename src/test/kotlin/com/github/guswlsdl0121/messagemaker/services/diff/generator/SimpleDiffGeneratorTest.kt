@@ -72,18 +72,22 @@ class SimpleDiffGeneratorTest : BasePlatformTestCase() {
 
     fun test_Fixture로_데이터생성() {
         // 가상 파일 생성
-        val file1 = myFixture.tempDirFixture.createFile("test1.txt", """
+        val file1 = myFixture.tempDirFixture.createFile(
+            "test1.txt", """
             Line 1
             Line 2
             Line 3
-        """.trimIndent())
+        """.trimIndent()
+        )
 
-        val file2 = myFixture.tempDirFixture.createFile("test2.txt", """
+        val file2 = myFixture.tempDirFixture.createFile(
+            "test2.txt", """
             Line 1
             Modified Line 2
             Line 3
             Added Line 4
-        """.trimIndent())
+        """.trimIndent()
+        )
 
         // 파일 내용 읽기
         val before = String(file1.contentsToByteArray())

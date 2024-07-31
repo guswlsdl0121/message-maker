@@ -1,7 +1,8 @@
 package com.github.guswlsdl0121.messagemaker.actions
 
+import com.github.guswlsdl0121.messagemaker.exception.ActionExceptionHandler
+import com.github.guswlsdl0121.messagemaker.exception.ProjectNullException
 import com.github.guswlsdl0121.messagemaker.services.CommitMessageEntryPoint
-import com.github.guswlsdl0121.messagemaker.utils.ActionUtils.executeWithErrorHandling
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.components.service
@@ -9,8 +10,12 @@ import com.intellij.openapi.project.DumbAwareAction
 
 class GenerateCommitMessageAction : DumbAwareAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        e.executeWithErrorHandling { project ->
-            project.service<CommitMessageEntryPoint>().run(e)
+        try {
+            e.project?.service<CommitMessageEntryPoint>()
+                ?.run(e)
+                ?: throw ProjectNullException()
+        } catch (ex: Exception) {
+            ActionExceptionHandler.handle(e.project, ex)
         }
     }
 

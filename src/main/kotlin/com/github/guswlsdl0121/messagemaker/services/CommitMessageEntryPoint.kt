@@ -1,6 +1,7 @@
 package com.github.guswlsdl0121.messagemaker.services
 
 import com.github.guswlsdl0121.messagemaker.services.diff.DiffSummaryService
+import com.github.guswlsdl0121.messagemaker.services.notification.NotificationService
 import com.github.guswlsdl0121.messagemaker.services.vsc.CommitService
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.components.Service
@@ -14,10 +15,14 @@ class CommitMessageEntryPoint(private val project: Project) {
         val commitService = project.service<CommitService>()
         val diffSummaryService = project.service<DiffSummaryService>()
 
-        val diff = commitService.getIncludedChanges(e)
-            ?.let { diffSummaryService.summaryDiff(it) }
+        val changes = commitService.getIncludedChanges(e)
+        if (changes.isNullOrEmpty()) {
+            NotificationService.showWarning(project, "변경사항이 없습니다.")
+            return
+        }
 
-        LOG.info("\n" + diff)
+        val diff = diffSummaryService.summaryDiff(changes)
+        LOG.info("\n$diff")
     }
 
     companion object {

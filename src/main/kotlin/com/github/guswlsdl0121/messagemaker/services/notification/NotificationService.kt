@@ -21,5 +21,7 @@ class NotificationService {
         private fun createTitle(title: String): String {
             return "$PLUGIN_NAME: $title"
         }
+
+        fun getPluginName(): String = PLUGIN_NAME
     }
 }

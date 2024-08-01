@@ -29,6 +29,9 @@
         <projectService
                 serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffGenerator"
                 serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleDiffGenerator"/>
+        <projectService
+                serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.SummaryGenerator"
+                serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleSummaryGenerator"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">

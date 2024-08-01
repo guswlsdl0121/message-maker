@@ -3,7 +3,9 @@
 ## Overview
 
 - 매번 커밋 시 적어야 하는 커밋 메시지를 **자동생성**하기 위해 플러그인을 제작
-- 생성되는 커밋 메시지는 [AngularJS의 커밋 메시지 컨벤션](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w)을 따름
+- 생성되는 커밋
+  메시지는 [AngularJS의 커밋 메시지 컨벤션](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w)
+  을 따름
 - 기존의 다른 영어권 플러그인과 달리, **한국어 커밋 메시지 생성 지원**
 - **사용성을 극대화**하기 위해 **IDE 좌측의 Commit탭의 아이콘 클릭**만으로 메시지를 생성할 수 있도록 지원
 

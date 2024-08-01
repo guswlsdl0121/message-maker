@@ -1,0 +1,17 @@
+# Commit Message
+
+## Summary of Changes
+- Added files: 0
+- Deleted files: 0
+- Modified files: 1
+- Moved files: 0
+
+## Detailed Changes by File
+### after.txt
+Change type: MODIFICATION
+Path before change: before.txt
+Path after change: after.txt
+Detailed changes:
+-Initial content
++Modified content
++with new line

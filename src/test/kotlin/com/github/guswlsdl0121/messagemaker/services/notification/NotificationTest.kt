@@ -1,47 +1,34 @@
 package com.github.guswlsdl0121.messagemaker.services.notification
 
-import com.intellij.notification.NotificationType
+import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.Notifications
 import com.intellij.openapi.project.Project
 import com.intellij.testFramework.PlatformTestUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
+import org.mockito.Mockito.mock
 import com.intellij.notification.Notification as IdeaNotification
 
-class NotificationTest : BasePlatformTestCase() {
+class NotificationServiceTest : BasePlatformTestCase() {
     private lateinit var project: Project
+    private lateinit var notificationService: NotificationService
+    private lateinit var notificationGroupManager: NotificationGroupManager
 
     override fun setUp() {
         super.setUp()
         project = myFixture.project
+        notificationGroupManager = mock(NotificationGroupManager::class.java)
+        notificationService = NotificationService(project)
     }
 
-    fun test_커밋메시지_생성알림() {
-        doTest(
-            notification = Notification.COMMIT_MESSAGE_GENERATED,
-            expectedTitle = "Commit Message Generated",
-            expectedContent = "Your commit message has been successfully generated.",
-            expectedType = NotificationType.INFORMATION
-        )
+    fun testShowNotification() {
+        doTest(Notification.COMMIT_MESSAGE_GENERATED, "Test arg")
     }
 
-    fun test_오류알림() {
-        val errorMessage = "Test error"
-        doTest(
-            notification = Notification.GENERATION_FAILED,
-            expectedTitle = "Generation Failed",
-            expectedContent = "Failed to generate commit message: $errorMessage",
-            expectedType = NotificationType.ERROR,
-            args = arrayOf(errorMessage)
-        )
+    fun testShowErrorNotification() {
+        doTest(Notification.GENERATION_FAILED, "Test error")
     }
 
-    private fun doTest(
-        notification: Notification,
-        expectedTitle: String,
-        expectedContent: String,
-        expectedType: NotificationType,
-        vararg args: Any?
-    ) {
+    private fun doTest(notification: Notification, vararg args: Any?) {
         var notificationReceived = false
         var receivedNotification: IdeaNotification? = null
 
@@ -53,7 +40,7 @@ class NotificationTest : BasePlatformTestCase() {
             }
         })
 
-        notification.show(project, *args)
+        notificationService.show(notification, *args)
 
         PlatformTestUtil.dispatchAllInvocationEventsInIdeEventQueue()
 
@@ -61,9 +48,9 @@ class NotificationTest : BasePlatformTestCase() {
         assertNotNull("수신된 알림이 null입니다.", receivedNotification)
 
         receivedNotification?.let { received ->
-            assertEquals("알림 제목이 일치하지 않습니다.", "${NotificationService.getPluginName()}: $expectedTitle", received.title)
-            assertEquals("알림 내용이 일치하지 않습니다.", expectedContent, received.content)
-            assertEquals("알림 타입이 일치하지 않습니다.", expectedType, received.type)
+            assertEquals("알림 제목이 일치하지 않습니다.", "${NotificationConstants.PLUGIN_NAME}: ${notification.title}", received.title)
+            assertEquals("알림 내용이 일치하지 않습니다.", notification.content.format(*args), received.content)
+            assertEquals("알림 타입이 일치하지 않습니다.", notification.type, received.type)
         }
 
         connection.disconnect()

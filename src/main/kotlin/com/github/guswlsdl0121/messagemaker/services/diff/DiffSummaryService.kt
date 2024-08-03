@@ -1,5 +1,6 @@
 package com.github.guswlsdl0121.messagemaker.services.diff
 
+import com.github.guswlsdl0121.messagemaker.services.diff.constants.DiffSummaryConstants
 import com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffGenerator
 import com.github.guswlsdl0121.messagemaker.services.diff.generator.SummaryGenerator
 import com.intellij.openapi.components.Service
@@ -17,15 +18,13 @@ class DiffSummaryService(private val project: Project) {
         val detailedChanges = diffGenerator.generate(changes)
 
         return buildString {
-            appendLine("Update project structure and modify content")
+            appendLine(DiffSummaryConstants.DEFAULT_TITLE)
             appendLine()
             appendLine(summary)
             appendLine()
             appendLine(detailedChanges)
             appendLine()
-            appendLine("# Additional Notes")
-            appendLine("- The project structure has been updated with new and deleted files.")
-            appendLine("- Content modifications have been made to improve functionality.")
+            appendLine(DiffSummaryConstants.ADDITIONAL_NOTES)
         }.trimEnd()
     }
 }

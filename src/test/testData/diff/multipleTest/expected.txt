@@ -12,3 +12,9 @@
 ```diff
 +Modified content
 ```
+
+### Moved file: after.txt
+```diff
+-before move
++after move.
+```

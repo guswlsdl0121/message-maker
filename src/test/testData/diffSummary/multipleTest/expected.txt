@@ -4,7 +4,7 @@ Update project structure and modify content
 - Added files: 1
 - Deleted files: 1
 - Modified files: 1
-- Moved files: 0
+- Moved files: 1
 
 ### New file: after.txt
 ```diff
@@ -19,6 +19,12 @@ Update project structure and modify content
 ### Modified file: before.txt
 ```diff
 +Modified content
+```
+
+### Moved file: after.txt
+```diff
+-before move
++after move.
 ```
 
 # Additional Notes

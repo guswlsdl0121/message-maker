@@ -25,8 +25,9 @@ class DiffSummaryServiceTest : AbstractDiffTest() {
         val addedChange = prepareChange("multipleTest/added")
         val deletedChange = prepareChange("multipleTest/deleted")
         val modifiedChange = prepareChange("multipleTest/modified", "Modified content")
+        val movedChange = prepareChange("multipleTest/moved")
 
-        val changes = listOf(addedChange, deletedChange, modifiedChange)
+        val changes = listOf(addedChange, deletedChange, modifiedChange, movedChange)
         val summary = diffSummaryService.summaryDiff(changes)
         verifyResult("multipleTest", summary)
     }

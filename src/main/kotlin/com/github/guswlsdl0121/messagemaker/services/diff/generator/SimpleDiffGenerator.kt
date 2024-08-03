@@ -1,6 +1,5 @@
 package com.github.guswlsdl0121.messagemaker.services.diff.generator
 
-import com.github.guswlsdl0121.messagemaker.utils.ChangeTypeUtil
 import com.intellij.openapi.vcs.changes.Change
 
 
@@ -17,9 +16,8 @@ class SimpleDiffGenerator : DiffGenerator {
         val afterContent = change.afterRevision?.content ?: ""
         val afterName = change.afterRevision?.file?.name
 
-        val changeType = refineChangeType(change)
+        val changeType = change.type
         val diffContent = generateDiff(beforeContent, afterContent)
-
 
         return buildString {
             appendLine("### ${afterName ?: beforeName}")
@@ -29,10 +27,6 @@ class SimpleDiffGenerator : DiffGenerator {
             appendLine("Detailed changes:")
             appendLine(diffContent)
         }.trimEnd()
-    }
-
-    private fun refineChangeType(change: Change): Change.Type {
-        return ChangeTypeUtil.refineChangeType(change)
     }
 
     private fun generateDiff(beforeContent: String, afterContent: String): String {

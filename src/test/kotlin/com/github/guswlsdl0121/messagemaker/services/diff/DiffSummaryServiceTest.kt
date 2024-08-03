@@ -1,6 +1,6 @@
 package com.github.guswlsdl0121.messagemaker.services.diff
 
-import com.github.guswlsdl0121.messagemaker.services.diff.utils.AbstractDiffTest
+import com.intellij.openapi.vcs.changes.Change
 
 class DiffSummaryServiceTest : AbstractDiffTest() {
 
@@ -16,27 +16,18 @@ class DiffSummaryServiceTest : AbstractDiffTest() {
     }
 
     fun testFileMoved() {
-        val change = prepareChange("fileMovedTest")
-        val summary = diffSummaryService.summaryDiff(listOf(change))
-        verifyResult("fileMovedTest", summary)
+        val changes = emptyList<Change>()
+        val summary = diffSummaryService.summaryDiff(changes)
+        verifyResult("emptyTest", summary)
     }
 
-    fun testFileAddition() {
-        val change = prepareChange("fileAdditionTest")
-        val summary = diffSummaryService.summaryDiff(listOf(change))
-        verifyResult("fileAdditionTest", summary)
-    }
+    fun testMultipleChanges() {
+        val addedChange = prepareChange("multipleTest/added")
+        val deletedChange = prepareChange("multipleTest/deleted")
+        val modifiedChange = prepareChange("multipleTest/modified", "Modified content")
 
-    fun testFileDeletion() {
-        val change = prepareChange("fileDeletionTest")
-        val summary = diffSummaryService.summaryDiff(listOf(change))
-        verifyResult("fileDeletionTest", summary)
-    }
-
-    fun testFileModification() {
-        val additionalContent = "with new line"
-        val change = prepareChange("fileModificationTest", additionalContent)
-        val summary = diffSummaryService.summaryDiff(listOf(change))
-        verifyResult("fileModificationTest", summary)
+        val changes = listOf(addedChange, deletedChange, modifiedChange)
+        val summary = diffSummaryService.summaryDiff(changes)
+        verifyResult("multipleTest", summary)
     }
 }

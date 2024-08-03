@@ -1,0 +1,26 @@
+Update project structure and modify content
+
+# Summary of Changes
+- Added files: 1
+- Deleted files: 1
+- Modified files: 1
+- Moved files: 0
+
+### New file: after.txt
+```diff
++This is a new file.
+```
+
+### Deleted file: before.txt
+```diff
+-This file will be deleted.
+```
+
+### Modified file: before.txt
+```diff
++Modified content
+```
+
+# Additional Notes
+- The project structure has been updated with new and deleted files.
+- Content modifications have been made to improve functionality.

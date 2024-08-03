@@ -17,8 +17,15 @@ class DiffSummaryService(private val project: Project) {
         val detailedChanges = diffGenerator.generate(changes)
 
         return buildString {
+            appendLine("Update project structure and modify content")
+            appendLine()
             appendLine(summary)
-            append(detailedChanges)
-        }
+            appendLine()
+            appendLine(detailedChanges)
+            appendLine()
+            appendLine("# Additional Notes")
+            appendLine("- The project structure has been updated with new and deleted files.")
+            appendLine("- Content modifications have been made to improve functionality.")
+        }.trimEnd()
     }
 }

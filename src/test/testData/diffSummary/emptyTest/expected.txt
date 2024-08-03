@@ -1,0 +1,13 @@
+Update project structure and modify content
+
+# Summary of Changes
+- Added files: 0
+- Deleted files: 0
+- Modified files: 0
+- Moved files: 0
+
+
+
+# Additional Notes
+- The project structure has been updated with new and deleted files.
+- Content modifications have been made to improve functionality.

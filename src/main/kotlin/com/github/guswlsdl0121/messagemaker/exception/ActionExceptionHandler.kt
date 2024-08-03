@@ -25,7 +25,7 @@ class ActionExceptionHandler(private val project: Project) {
             }
             is ProjectNullException -> {
                 PluginLogger.warn(ex.message ?: "프로젝트가 null입니다.")
-                notificationService.show(Notification.GENERATION_FAILED)
+                notificationService.show(Notification.PROJECT_NOT_FOUND)
             }
         }
     }
@@ -33,6 +33,6 @@ class ActionExceptionHandler(private val project: Project) {
     private fun handleUnexpectedException(ex: Exception) {
         PluginLogger.error("예상치 못한 오류 발생", ex, true)
         val notificationService = project.service<NotificationService>()
-        notificationService.show(Notification.GENERATION_FAILED, ex.message)
+        notificationService.show(Notification.UNEXPECTED_ERROR, ex.message)
     }
 }

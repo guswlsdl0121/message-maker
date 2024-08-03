@@ -25,7 +25,7 @@ class NotificationServiceTest : BasePlatformTestCase() {
     }
 
     fun testShowErrorNotification() {
-        doTest(Notification.GENERATION_FAILED, "Test error")
+        doTest(Notification.PROJECT_NOT_FOUND, "Test error")
     }
 
     private fun doTest(notification: Notification, vararg args: Any?) {

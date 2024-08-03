@@ -12,9 +12,14 @@ enum class Notification(
         "There are no changes to generate a commit message for.",
         NotificationType.WARNING
     ),
-    GENERATION_FAILED(
-        "Generation Failed",
-        "Failed to generate commit message: %s",
+    PROJECT_NOT_FOUND(
+        "Project Not Found",
+        "Current project is not recognized or is null. Failed to generate commit message.",
+        NotificationType.ERROR
+    ),
+    UNEXPECTED_ERROR(
+        "Unexpected Error",
+        "An unexpected error occurred. Please check the logs for more details.",
         NotificationType.ERROR
     ),
     COMMIT_MESSAGE_GENERATED(

@@ -1,33 +1,38 @@
 package com.github.guswlsdl0121.messagemaker.exception
 
 import com.github.guswlsdl0121.messagemaker.services.notification.Notification
-import com.github.guswlsdl0121.messagemaker.utils.LogFactory
+import com.github.guswlsdl0121.messagemaker.services.notification.NotificationService
+import com.github.guswlsdl0121.messagemaker.utils.PluginLogger
+import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 
-object ActionExceptionHandler {
-    fun handle(project: Project?, ex: Exception) {
+@Service(Service.Level.PROJECT)
+class ActionExceptionHandler(private val project: Project) {
+    fun handle(ex: Exception) {
         when (ex) {
-            is MessageMakerException -> handleMessageMakerException(project, ex)
-            else -> handleUnexpectedException(project, ex)
+            is MessageMakerException -> handleMessageMakerException(ex)
+            else -> handleUnexpectedException(ex)
         }
     }
 
-    private fun handleMessageMakerException(project: Project?, ex: MessageMakerException) {
+    private fun handleMessageMakerException(ex: MessageMakerException) {
+        val notificationService = project.service<NotificationService>()
         when (ex) {
             is NoChangesException -> {
-                LogFactory.warn(ex.message ?: "변경사항이 없습니다.")
-                project?.let { Notification.NO_CHANGES_DETECTED.show(project) }
+                PluginLogger.warn(ex.message ?: "변경사항이 없습니다.")
+                notificationService.show(Notification.NO_CHANGES_DETECTED)
             }
-
             is ProjectNullException -> {
-                LogFactory.warn(ex.message ?: "프로젝트가 null입니다.")
-                project?.let { Notification.GENERATION_FAILED.show(project) }
+                PluginLogger.warn(ex.message ?: "프로젝트가 null입니다.")
+                notificationService.show(Notification.GENERATION_FAILED)
             }
         }
     }
 
-    private fun handleUnexpectedException(project: Project?, ex: Exception) {
-        LogFactory.error("예상치 못한 오류 발생", ex)
-        project?.let { Notification.GENERATION_FAILED.show(project, ex.message) }
+    private fun handleUnexpectedException(ex: Exception) {
+        PluginLogger.error("예상치 못한 오류 발생", ex, true)
+        val notificationService = project.service<NotificationService>()
+        notificationService.show(Notification.GENERATION_FAILED, ex.message)
     }
 }

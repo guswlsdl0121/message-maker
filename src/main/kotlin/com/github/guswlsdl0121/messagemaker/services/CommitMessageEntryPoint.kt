@@ -2,7 +2,7 @@ package com.github.guswlsdl0121.messagemaker.services
 
 import com.github.guswlsdl0121.messagemaker.services.diff.DiffSummaryService
 import com.github.guswlsdl0121.messagemaker.services.vsc.CommitService
-import com.github.guswlsdl0121.messagemaker.utils.LogFactory
+import com.github.guswlsdl0121.messagemaker.utils.PluginLogger
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
@@ -17,6 +17,6 @@ class CommitMessageEntryPoint(private val project: Project) {
         val changes = commitService.getIncludedChanges(e)
         val diff = diffSummaryService.summaryDiff(changes)
 
-        LogFactory.info("\n$diff")
+        PluginLogger.info("\n$diff")
     }
 }

@@ -25,7 +25,7 @@ class SimpleSummaryGeneratorTest : AbstractDiffTest() {
     fun testMultipleChanges() {
         val addedChange = prepareChange("multipleTest/added")
         val deletedChange = prepareChange("multipleTest/deleted")
-        val modifiedChange = prepareChange("multipleTest/modified", "\nModified content")
+        val modifiedChange = prepareChange("multipleTest/modified", "Modified content")
 
         val changes = listOf(addedChange, deletedChange, modifiedChange)
         val summary = summaryGenerator.generate(changes)

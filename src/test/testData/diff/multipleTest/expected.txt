@@ -1,0 +1,14 @@
+### New file: after.txt
+```diff
++This is a new file.
+```
+
+### Deleted file: before.txt
+```diff
+-This file will be deleted.
+```
+
+### Modified file: before.txt
+```diff
++Modified content
+```

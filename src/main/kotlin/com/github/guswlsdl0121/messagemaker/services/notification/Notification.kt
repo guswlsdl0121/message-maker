@@ -24,10 +24,6 @@ enum class Notification(
         NotificationType.INFORMATION
     );
 
-    fun getTitle(): String = title
-    fun getContent(): String = content
-    fun getType(): NotificationType = type
-
     fun show(project: Project?, vararg args: Any?) {
         val formattedContent = content.format(*args)
         NotificationService.show(project, title, formattedContent, type)

@@ -3,13 +3,15 @@
 ## Summary of Changes
 - Added files: 0
 - Deleted files: 0
-- Modified files: 1
-- Moved files: 0
+- Modified files: 0
+- Moved files: 1
 
 ## Detailed Changes by File
-### before.txt
-Change type: MODIFICATION
+### after.txt
+Change type: MOVED
 Path before change: before.txt
-Path after change: before.txt
+Path after change: after.txt
 Detailed changes:
+-Initial content
++Modified content
 +with new line

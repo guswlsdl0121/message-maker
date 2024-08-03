@@ -8,15 +8,11 @@ class SimpleSummaryGenerator : SummaryGenerator {
         val changeTypeCounts = ChangeTypeUtil.countChangeTypes(changes)
 
         return buildString {
-            appendLine("# Commit Message")
-            appendLine()
-            appendLine("## Summary of Changes")
+            appendLine("# Summary of Changes")
             appendLine("- Added files: ${changeTypeCounts[Change.Type.NEW] ?: 0}")
             appendLine("- Deleted files: ${changeTypeCounts[Change.Type.DELETED] ?: 0}")
             appendLine("- Modified files: ${changeTypeCounts[Change.Type.MODIFICATION] ?: 0}")
             appendLine("- Moved files: ${changeTypeCounts[Change.Type.MOVED] ?: 0}")
-            appendLine()
-            append("## Detailed Changes by File")
         }.trimEnd()
     }
 }

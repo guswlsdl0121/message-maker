@@ -5,7 +5,7 @@ import com.intellij.openapi.vcs.changes.Change
 
 class SimpleDiffGenerator : DiffGenerator {
     override fun generate(changes: List<Change>): String {
-        return changes.joinToString("\n") { change ->
+        return changes.joinToString("\n\n") { change ->
             generateSingleChange(change)
         }.trimEnd()
     }
@@ -16,16 +16,20 @@ class SimpleDiffGenerator : DiffGenerator {
         val afterContent = change.afterRevision?.content ?: ""
         val afterName = change.afterRevision?.file?.name
 
-        val changeType = change.type
+        val changeType = when (change.type) {
+            Change.Type.NEW -> "New file"
+            Change.Type.DELETED -> "Deleted file"
+            Change.Type.MOVED -> "Moved file"
+            else -> "Modified file"
+        }
+
         val diffContent = generateDiff(beforeContent, afterContent)
 
         return buildString {
-            appendLine("### ${afterName ?: beforeName}")
-            appendLine("Change type: $changeType")
-            beforeName?.let { appendLine("Path before change: $it") }
-            afterName?.let { appendLine("Path after change: $it") }
-            appendLine("Detailed changes:")
+            appendLine("### $changeType: ${afterName ?: beforeName}")
+            appendLine("```diff")
             appendLine(diffContent)
+            appendLine("```")
         }.trimEnd()
     }
 

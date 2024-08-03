@@ -1,4 +1,4 @@
-package com.github.guswlsdl0121.messagemaker.services.diff.utils
+package com.github.guswlsdl0121.messagemaker.utils
 
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.fileEditor.FileDocumentManager

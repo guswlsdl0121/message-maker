@@ -1,12 +1,16 @@
 <idea-plugin>
     <id>com.github.guswlsdl0121.messagemaker</id>
     <name>MessageMaker</name>
-    <vendor email="your-email@example.com" url="https://github.com/guswlsdl0121">Your Name</vendor>
+    <vendor email="guswlsdl0121@gmail.com" url="https://github.com/guswlsdl0121">안현진</vendor>
     <version>1.0.0</version>
 
-    <description>
-        <![CDATA[<p>This plugin helps to generate commit messages based on selected changes.</p>]]></description>
-    <change-notes><![CDATA[<p>Initial release</p>]]></change-notes>
+    <description><![CDATA[
+    <p>This plugin helps to generate commit messages based on selected changes.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    <p>Initial release</p>
+    ]]></change-notes>
 
     <idea-version since-build="222.3345.118"/>
 
@@ -32,10 +36,6 @@
         <projectService
                 serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.SummaryGenerator"
                 serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleSummaryGenerator"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <notificationGroup id="Commit Message Generator" displayType="BALLOON"
-                           key="notification.group.commit.message.generator"/>
+        <notificationGroup id="Commit Message Generator" displayType="BALLOON" key="notification.group.commit.message.generator"/>
     </extensions>
 </idea-plugin>

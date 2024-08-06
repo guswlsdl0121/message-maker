@@ -25,6 +25,7 @@
                 text="Generate Commit Message"
                 description="Generate a commit message based on selected changes"
                 icon="/icons/commitIcon.svg">
+            <!--            해당 그룹의 첫번째에 이 Action을 삽입한다.-->
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
         </action>
     </actions>

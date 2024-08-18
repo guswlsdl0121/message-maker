@@ -9,8 +9,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vcs.changes.Change
 
 @Service(Service.Level.PROJECT)
-class DiffSummaryService(private val project: Project) {
-    fun summaryDiff(changes: List<Change>): String {
+class DiffSummaryGenerator(private val project: Project) {
+    fun getDiff(changes: List<Change>): String {
         val summaryGenerator = project.service<SummaryGenerator>()
         val diffGenerator = project.service<DiffGenerator>()
 

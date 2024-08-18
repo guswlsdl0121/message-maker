@@ -20,6 +20,12 @@
     <resource-bundle>messages.MessageBundle</resource-bundle>
 
     <actions>
+            <action id="com.github.guswlsdl0121.messagemaker.actions.DataKeyDebugAction"
+                    class="com.github.guswlsdl0121.messagemaker.actions.DataKeyDebugAction" text="Debug DataKey"
+                    description="Action to debug DataKey functionality">
+                <add-to-group group-id="ToolsMenu" anchor="last"/>
+            </action>
+
         <action id="com.github.guswlsdl0121.messagemaker.actions.GenerateCommitMessageAction"
                 class="com.github.guswlsdl0121.messagemaker.actions.GenerateCommitMessageAction"
                 text="Generate Commit Message"

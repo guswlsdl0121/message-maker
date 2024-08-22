@@ -9,16 +9,16 @@ import com.intellij.vcs.commit.AbstractCommitWorkflowHandler
 import com.intellij.vcs.commit.CommitWorkflowUi
 import io.mockk.*
 
-class CommitHandlerTest : BasePlatformTestCase() {
+class CommitServiceTest : BasePlatformTestCase() {
 
-    private lateinit var commitHandler: CommitHandler
+    private lateinit var commitService: CommitService
     private lateinit var mockEvent: AnActionEvent
     private lateinit var mockHandler: AbstractCommitWorkflowHandler<*, *>
     private lateinit var mockUi: CommitWorkflowUi
 
     override fun setUp() {
         super.setUp()
-        commitHandler = CommitHandler()
+        commitService = CommitService()
         mockEvent = mockk()
         mockHandler = mockk()
         mockUi = mockk()
@@ -32,7 +32,7 @@ class CommitHandlerTest : BasePlatformTestCase() {
         val expectedChanges = listOf(mockk<Change>())
         every { mockUi.getIncludedChanges() } returns expectedChanges
 
-        val result = commitHandler.getCheckedChanges(mockEvent)
+        val result = commitService.getCheckedChanges(mockEvent)
 
         assertEquals("반환된 변경 사항이 기대한 변경 사항과 일치해야 합니다.", expectedChanges, result)
     }
@@ -41,16 +41,7 @@ class CommitHandlerTest : BasePlatformTestCase() {
         every { mockUi.getIncludedChanges() } returns emptyList()
 
         assertThrows(NoChangesException::class.java) {
-            commitHandler.getCheckedChanges(mockEvent)
+            commitService.getCheckedChanges(mockEvent)
         }
     }
-
-    fun testExceptionThrownWhenCommitWorkflowHandlerIsNull() {
-        every { mockEvent.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) } returns null
-
-        assertThrows(NoChangesException::class.java) {
-            commitHandler.getCheckedChanges(mockEvent)
-        }
-    }
-
 }

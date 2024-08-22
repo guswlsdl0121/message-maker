@@ -1,11 +1,10 @@
 package com.github.guswlsdl0121.messagemaker.services.diff.generator
 
-import com.github.guswlsdl0121.messagemaker.utils.ChangeTypeUtil
 import com.intellij.openapi.vcs.changes.Change
 
-class SimpleSummaryGenerator : SummaryGenerator {
+class SimpleDiffSummaryGenerator : DiffSummaryGenerator {
     override fun generate(changes: List<Change>): String {
-        val changeTypeCounts = ChangeTypeUtil.countChangeTypes(changes)
+        val changeTypeCounts = countChangeTypes(changes)
 
         return buildString {
             appendLine("# Summary of Changes")
@@ -14,5 +13,9 @@ class SimpleSummaryGenerator : SummaryGenerator {
             appendLine("- Modified files: ${changeTypeCounts[Change.Type.MODIFICATION] ?: 0}")
             appendLine("- Moved files: ${changeTypeCounts[Change.Type.MOVED] ?: 0}")
         }.trimEnd()
+    }
+
+    private fun countChangeTypes(changes: List<Change>): Map<Change.Type, Int> {
+        return changes.groupingBy { it.type }.eachCount()
     }
 }

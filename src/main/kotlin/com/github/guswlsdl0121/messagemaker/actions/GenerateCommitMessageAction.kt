@@ -8,10 +8,10 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.DumbAwareAction
 
 class GenerateCommitMessageAction : DumbAwareAction() {
-    override fun actionPerformed(e: AnActionEvent) {
-        e.project?.let { project ->
+    override fun actionPerformed(event: AnActionEvent) {
+        event.project?.let { project ->
             try {
-                project.service<CommitMessageEntryPoint>().run(e)
+                project.service<CommitMessageEntryPoint>().run(event)
             } catch (ex: Exception) {
                 project.service<ActionExceptionHandler>().handle(ex)
             }

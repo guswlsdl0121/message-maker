@@ -3,7 +3,7 @@ package com.github.guswlsdl0121.messagemaker.services.diff.generator
 import com.intellij.openapi.vcs.changes.Change
 
 
-class SimpleDiffGenerator : DiffGenerator {
+class SimpleDiffDetailGenerator : DiffDetailGenerator {
     override fun generate(changes: List<Change>): String {
         return changes.joinToString("\n\n") { change ->
             generateSingleChange(change)

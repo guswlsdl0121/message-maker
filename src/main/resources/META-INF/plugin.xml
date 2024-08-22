@@ -20,12 +20,6 @@
     <resource-bundle>messages.MessageBundle</resource-bundle>
 
     <actions>
-            <action id="com.github.guswlsdl0121.messagemaker.actions.DataKeyDebugAction"
-                    class="com.github.guswlsdl0121.messagemaker.actions.DataKeyDebugAction" text="Debug DataKey"
-                    description="Action to debug DataKey functionality">
-                <add-to-group group-id="ToolsMenu" anchor="last"/>
-            </action>
-
         <action id="com.github.guswlsdl0121.messagemaker.actions.GenerateCommitMessageAction"
                 class="com.github.guswlsdl0121.messagemaker.actions.GenerateCommitMessageAction"
                 text="Generate Commit Message"
@@ -38,11 +32,11 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <projectService
-                serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffGenerator"
-                serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleDiffGenerator"/>
+                serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffDetailGenerator"
+                serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleDiffDetailGenerator"/>
         <projectService
-                serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.SummaryGenerator"
-                serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleSummaryGenerator"/>
+                serviceInterface="com.github.guswlsdl0121.messagemaker.services.diff.generator.DiffSummaryGenerator"
+                serviceImplementation="com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleDiffSummaryGenerator"/>
         <notificationGroup id="Commit Message Generator" displayType="BALLOON" key="notification.group.commit.message.generator"/>
     </extensions>
 </idea-plugin>

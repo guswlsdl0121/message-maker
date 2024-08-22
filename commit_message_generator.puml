@@ -1,0 +1,68 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class GenerateCommitMessageAction {
+  + actionPerformed(e: AnActionEvent)
+  + update(e: AnActionEvent)
+  + getActionUpdateThread(): ActionUpdateThread
+}
+
+class CommitMessageEntryPoint {
+  - project: Project
+  + run(e: AnActionEvent)
+}
+
+class CommitService {
+  + getCheckedChanges(e: AnActionEvent): List<Change>
+  - getHandler(e: AnActionEvent): AbstractCommitWorkflowHandler<*, *>?
+}
+
+class DiffService {
+  - project: Project
+  + getDiff(changes: List<Change>): String
+}
+
+interface DiffSummaryGenerator {
+  + generate(changes: List<Change>): String
+}
+
+class SimpleDiffSummaryGenerator {
+  + generate(changes: List<Change>): String
+}
+
+interface DiffDetailGenerator {
+  + generate(changes: List<Change>): String
+}
+
+class SimpleDiffDetailGenerator {
+  + generate(changes: List<Change>): String
+  - generateSingleChange(change: Change): String
+  - generateDiff(beforeContent: String, afterContent: String): String
+}
+
+class ActionExceptionHandler {
+  - project: Project
+  + handle(ex: Exception)
+  - handleMessageMakerException(ex: MessageMakerException)
+  - handleUnexpectedException(ex: Exception)
+}
+
+class NotificationService {
+  - project: Project
+  + show(notification: Notification, vararg args: Any?)
+  - show(title: String, content: String, type: NotificationType)
+  - createTitle(title: String): String
+}
+
+GenerateCommitMessageAction --> CommitMessageEntryPoint: uses
+CommitMessageEntryPoint --> CommitService: uses
+CommitMessageEntryPoint --> DiffService: uses
+DiffService --> DiffSummaryGenerator: uses
+DiffService --> DiffDetailGenerator: uses
+DiffSummaryGenerator <|.. SimpleDiffSummaryGenerator
+DiffDetailGenerator <|.. SimpleDiffDetailGenerator
+GenerateCommitMessageAction --> ActionExceptionHandler: uses
+ActionExceptionHandler --> NotificationService: uses
+
+@enduml

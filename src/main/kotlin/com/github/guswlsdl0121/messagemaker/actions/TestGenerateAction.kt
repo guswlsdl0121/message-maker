@@ -15,8 +15,9 @@ class TestGenerateAction : DumbAwareAction() {
         e.project!!
 
         val commitWorkflowHandler = e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as AbstractCommitWorkflowHandler<*, *>
-
         val includedChanges: List<Change> = commitWorkflowHandler.ui.getIncludedChanges()
+
+
         if (includedChanges.isEmpty()) {
             logger.info("No changes selected")
             return

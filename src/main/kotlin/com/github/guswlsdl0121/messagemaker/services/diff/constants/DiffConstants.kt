@@ -1,6 +1,6 @@
 package com.github.guswlsdl0121.messagemaker.services.diff.constants
 
-object DiffSummaryConstants {
+object DiffConstants {
     const val DEFAULT_TITLE = "Update project structure and modify content"
     val ADDITIONAL_NOTES = """
         # Additional Notes

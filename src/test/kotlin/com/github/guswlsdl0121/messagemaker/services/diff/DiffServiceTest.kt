@@ -1,24 +1,23 @@
-package com.github.guswlsdl0121.messagemaker.services.diff.generator
+package com.github.guswlsdl0121.messagemaker.services.diff
 
-import com.github.guswlsdl0121.messagemaker.services.diff.AbstractDiffTest
 import com.intellij.openapi.vcs.changes.Change
 
-class SimpleSummaryGeneratorTest : AbstractDiffTest() {
+class DiffServiceTest : AbstractDiffTest() {
 
-    private lateinit var summaryGenerator: SimpleSummaryGenerator
+    private lateinit var diffService: DiffService
 
     override fun getRelativeTestDataPath(): String {
-        return "summary"
+        return "diffSummary"
     }
 
     override fun setUp() {
         super.setUp()
-        summaryGenerator = SimpleSummaryGenerator()
+        diffService = DiffService(project)
     }
 
     fun testEmptyChanges() {
         val changes = emptyList<Change>()
-        val summary = summaryGenerator.generate(changes)
+        val summary = diffService.getDiff(changes)
         verifyResult("emptyTest", summary)
     }
 
@@ -29,7 +28,7 @@ class SimpleSummaryGeneratorTest : AbstractDiffTest() {
         val movedChange = prepareChange("multipleTest/moved")
 
         val changes = listOf(addedChange, deletedChange, modifiedChange, movedChange)
-        val summary = summaryGenerator.generate(changes)
+        val summary = diffService.getDiff(changes)
         verifyResult("multipleTest", summary)
     }
 }

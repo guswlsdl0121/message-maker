@@ -7,19 +7,16 @@ import com.intellij.openapi.vcs.VcsDataKeys
 import com.intellij.openapi.vcs.changes.Change
 import com.intellij.vcs.commit.AbstractCommitWorkflowHandler
 
-typealias CommitWorkflowHandler = AbstractCommitWorkflowHandler<*, *>
-
 @Service(Service.Level.PROJECT)
-class CommitHandler {
-    fun getCheckedChanges(e: AnActionEvent): List<Change> {
-        val handler = getHandler(e) ?: return emptyList()
+class CommitService {
+    fun getCheckedChanges(event: AnActionEvent): List<Change> {
+        val handler = getHandler(event) ?: return emptyList()
 
         return handler.ui.getIncludedChanges()
             .takeIf { it.isNotEmpty() }
             ?: throw NoChangesException()
     }
 
-    private fun getHandler(e: AnActionEvent): CommitWorkflowHandler? {
-        return e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as? CommitWorkflowHandler
-    }
+    private fun getHandler(event: AnActionEvent) =
+        event.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as? AbstractCommitWorkflowHandler<*, *>
 }

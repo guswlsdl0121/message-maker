@@ -3,22 +3,22 @@ package com.github.guswlsdl0121.messagemaker.services.diff.generator
 import com.github.guswlsdl0121.messagemaker.services.diff.AbstractDiffTest
 import com.intellij.openapi.vcs.changes.Change
 
-class SimpleDiffGeneratorTest : AbstractDiffTest() {
+class SimpleDiffSummaryGeneratorTest : AbstractDiffTest() {
 
-    private lateinit var diffGenerator: SimpleDiffGenerator
+    private lateinit var summaryGenerator: SimpleDiffSummaryGenerator
 
     override fun getRelativeTestDataPath(): String {
-        return "diff"
+        return "summary"
     }
 
     override fun setUp() {
         super.setUp()
-        diffGenerator = SimpleDiffGenerator()
+        summaryGenerator = SimpleDiffSummaryGenerator()
     }
 
     fun testEmptyChanges() {
         val changes = emptyList<Change>()
-        val summary = diffGenerator.generate(changes)
+        val summary = summaryGenerator.generate(changes)
         verifyResult("emptyTest", summary)
     }
 
@@ -29,7 +29,7 @@ class SimpleDiffGeneratorTest : AbstractDiffTest() {
         val movedChange = prepareChange("multipleTest/moved")
 
         val changes = listOf(addedChange, deletedChange, modifiedChange, movedChange)
-        val summary = diffGenerator.generate(changes)
+        val summary = summaryGenerator.generate(changes)
         verifyResult("multipleTest", summary)
     }
 }

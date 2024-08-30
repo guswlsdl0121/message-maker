@@ -1,7 +1,6 @@
 package com.github.guswlsdl0121.messagemaker.actions
 
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.vcs.VcsDataKeys
@@ -14,7 +13,8 @@ class TestGenerateAction : DumbAwareAction() {
     override fun actionPerformed(e: AnActionEvent) {
         e.project!!
 
-        val commitWorkflowHandler = e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as AbstractCommitWorkflowHandler<*, *>
+        val commitWorkflowHandler =
+            e.getData(VcsDataKeys.COMMIT_WORKFLOW_HANDLER) as AbstractCommitWorkflowHandler<*, *>
         val includedChanges: List<Change> = commitWorkflowHandler.ui.getIncludedChanges()
 
 

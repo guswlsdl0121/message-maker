@@ -7,9 +7,9 @@ import com.intellij.openapi.project.Project
 
 @Service(Service.Level.PROJECT)
 class NotificationService(private val project: Project) {
-    fun show(notification: Notification, vararg args: Any?) {
-        val formattedContent = notification.content.format(*args)
-        show(notification.title, formattedContent, notification.type)
+    fun show(commitMessageNotification: CommitMessageNotification, vararg args: Any?) {
+        val formattedContent = commitMessageNotification.content.format(*args)
+        show(commitMessageNotification.title, formattedContent, commitMessageNotification.type)
     }
 
     private fun show(title: String, content: String, type: NotificationType) {

@@ -2,7 +2,7 @@ package com.github.guswlsdl0121.messagemaker.services.notification
 
 import com.intellij.notification.NotificationType
 
-enum class Notification(
+enum class CommitMessageNotification(
     val title: String,
     val content: String,
     val type: NotificationType

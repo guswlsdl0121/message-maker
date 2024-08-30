@@ -15,13 +15,13 @@ class DiffServiceTest : AbstractDiffTest() {
         diffService = DiffService(project)
     }
 
-    fun testEmptyChanges() {
+    fun test_비어있는_변경사항() {
         val changes = emptyList<Change>()
         val summary = diffService.getDiff(changes)
         verifyResult("emptyTest", summary)
     }
 
-    fun testMultipleChanges() {
+    fun test_여러_변경사항() {
         val addedChange = prepareChange("multipleTest/added")
         val deletedChange = prepareChange("multipleTest/deleted")
         val modifiedChange = prepareChange("multipleTest/modified", "Modified content")

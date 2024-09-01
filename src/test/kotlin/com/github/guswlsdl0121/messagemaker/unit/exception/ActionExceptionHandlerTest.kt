@@ -1,5 +1,6 @@
-package com.github.guswlsdl0121.messagemaker.exception
+package com.github.guswlsdl0121.messagemaker.unit.exception
 
+import com.github.guswlsdl0121.messagemaker.exception.NoChangesException
 import com.intellij.notification.NotificationType
 
 class ActionExceptionHandlerTest : AbstractActionExceptionHandlerTest() {
@@ -8,14 +9,6 @@ class ActionExceptionHandlerTest : AbstractActionExceptionHandlerTest() {
             NoChangesException(),
             "MessageMaker: No Changes Detected",
             NotificationType.WARNING
-        )
-    }
-
-    fun test_프로젝트가_null일때_에러알림표시() {
-        testExceptionHandling(
-            ProjectNullException(),
-            "MessageMaker: Project Not Found",
-            NotificationType.ERROR
         )
     }
 

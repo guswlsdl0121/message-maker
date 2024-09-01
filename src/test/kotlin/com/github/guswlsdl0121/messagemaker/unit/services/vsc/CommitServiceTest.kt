@@ -1,6 +1,7 @@
-package com.github.guswlsdl0121.messagemaker.services.vsc
+package com.github.guswlsdl0121.messagemaker.unit.services.vsc
 
 import com.github.guswlsdl0121.messagemaker.exception.NoChangesException
+import com.github.guswlsdl0121.messagemaker.services.vsc.CommitService
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.vcs.VcsDataKeys
 import com.intellij.openapi.vcs.changes.Change

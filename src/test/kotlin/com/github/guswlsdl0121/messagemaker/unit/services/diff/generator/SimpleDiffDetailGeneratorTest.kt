@@ -1,34 +1,36 @@
-package com.github.guswlsdl0121.messagemaker.services.diff
+package com.github.guswlsdl0121.messagemaker.unit.services.diff.generator
 
+import com.github.guswlsdl0121.messagemaker.services.diff.generator.SimpleDiffDetailGenerator
+import com.github.guswlsdl0121.messagemaker.unit.services.diff.AbstractDiffTest
 import com.intellij.openapi.vcs.changes.Change
 
-class DiffServiceTest : AbstractDiffTest() {
+class SimpleDiffDetailGeneratorTest : AbstractDiffTest() {
 
-    private lateinit var diffService: DiffService
+    private lateinit var diffGenerator: SimpleDiffDetailGenerator
 
     override fun getRelativeTestDataPath(): String {
-        return "diffSummary"
+        return "diff"
     }
 
     override fun setUp() {
         super.setUp()
-        diffService = DiffService(project)
+        diffGenerator = SimpleDiffDetailGenerator()
     }
 
-    fun test_비어있는_변경사항() {
+    fun testEmptyChanges() {
         val changes = emptyList<Change>()
-        val summary = diffService.getDiff(changes)
+        val summary = diffGenerator.generate(changes)
         verifyResult("emptyTest", summary)
     }
 
-    fun test_여러_변경사항() {
+    fun testMultipleChanges() {
         val addedChange = prepareChange("multipleTest/added")
         val deletedChange = prepareChange("multipleTest/deleted")
         val modifiedChange = prepareChange("multipleTest/modified", "Modified content")
         val movedChange = prepareChange("multipleTest/moved")
 
         val changes = listOf(addedChange, deletedChange, modifiedChange, movedChange)
-        val summary = diffService.getDiff(changes)
+        val summary = diffGenerator.generate(changes)
         verifyResult("multipleTest", summary)
     }
 }

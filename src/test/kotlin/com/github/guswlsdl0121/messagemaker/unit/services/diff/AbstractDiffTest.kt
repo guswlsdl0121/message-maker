@@ -1,6 +1,6 @@
-package com.github.guswlsdl0121.messagemaker.services.diff
+package com.github.guswlsdl0121.messagemaker.unit.services.diff
 
-import com.github.guswlsdl0121.messagemaker.utils.FileUtils
+import com.github.guswlsdl0121.messagemaker.unit.utils.FileUtils
 import com.intellij.openapi.vcs.FilePath
 import com.intellij.openapi.vcs.FileStatus
 import com.intellij.openapi.vcs.LocalFilePath

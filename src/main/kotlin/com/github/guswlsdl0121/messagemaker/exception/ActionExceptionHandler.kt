@@ -23,11 +23,6 @@ class ActionExceptionHandler(private val project: Project) {
                 CustomLogger.warn(ex.message ?: "변경사항이 없습니다.")
                 notificationService.show(CommitMessageNotification.NO_CHANGES_DETECTED)
             }
-
-            is ProjectNullException -> {
-                CustomLogger.warn(ex.message ?: "프로젝트가 null입니다.")
-                notificationService.show(CommitMessageNotification.PROJECT_NOT_FOUND)
-            }
         }
     }
 

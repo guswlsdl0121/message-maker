@@ -1,5 +1,6 @@
-package com.github.guswlsdl0121.messagemaker.exception
+package com.github.guswlsdl0121.messagemaker.unit.exception
 
+import com.github.guswlsdl0121.messagemaker.exception.ActionExceptionHandler
 import com.github.guswlsdl0121.messagemaker.services.notification.NotificationService
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType
